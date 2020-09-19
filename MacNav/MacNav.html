@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style type='text/css'>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        html,
+        body {
+            height: 100%;
+            overflow: hidden;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        ul::after {
+            clear: both;
+            content: '';
+            display: block;
+        }
+
+        #wrap-li {
+            /* 
+            当设置一个模块是absolute的时候它其实就脱离了文档流了。再也不是独占一行
+            它的高度和宽度都是被内容所撑开。。
+             */
+            position: absolute;
+            top: 0px;
+            left: calc(50% - 190px);
+            height: 40px;
+        }
+
+        ul li {
+            float: left;
+            margin-left: 40px;
+            border-radius: 50%;
+            text-align: center;
+        }
+
+        li>img {
+            width: 40px;
+        }
+
+        /* Ananother nav */
+        #wrap-normal {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+        }
+
+        #wrap-normal>img {
+            width: 40px;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <ul id="wrap-list">
+            <li><img src='./asset/user-male.png' alt="1"></li>
+            <li><img src="./asset/user-male.png" alt="2"></li>
+            <li><img src="./asset/user-male.png" alt="3"></li>
+            <li><img src="./asset/user-male.png" alt="4"></li>
+        </ul>
+    </nav>
+
+    <nav id="wrap-normal">
+        <img src='./asset/mac2.png' alt="1">
+        <img src="./asset/mac2.png" alt="2">
+        <img src="./asset/mac2.png" alt="3">
+        <img src="./asset/mac2.png" alt="4">
+    </nav>
+</body>
+
+<script type="text/javascript">
+    window.onload = function () {
+        var r = 100;
+        var imgItems1 = document.querySelectorAll('#wrap-list>li>img')
+        var imgItems2 = document.querySelectorAll('#wrap-normal>img')
+        document.onmousemove = function (ev) {
+            ev = ev || event
+            // 在document的元素中绑定事件监听。
+            for (var i = 0; i < imgItems1.length; i++) {
+                var a1 = imgItems1[i].getBoundingClientRect().left + imgItems1[i].offsetWidth / 2 - ev.clientX
+                var b1 = imgItems1[i].getBoundingClientRect().top + imgItems1[i].offsetHeight / 2 - ev.clientY
+                var c1 = Math.sqrt(a1 * a1 + b1 * b1)
+
+                var a2 = imgItems2[i].getBoundingClientRect().left + imgItems2[i].offsetWidth / 2 - ev.clientX
+                var b2 = imgItems2[i].getBoundingClientRect().top + imgItems2[i].offsetHeight / 2 - ev.clientY
+                var c2 = Math.sqrt(a2 * a2 + b2 * b2)
+
+                if (c1 > r) {
+                    c1 = r
+                }
+
+                if (c2 > r) {
+                    c2 = r
+                }
+
+                imgItems1[i].style.width = 100 - c1 * 0.4 + 'px'
+                imgItems1[i].style.bottom = 0
+
+                imgItems2[i].style.width = 100 - c2 * 0.4 + 'px'
+                imgItems2[i].style.bottom = 0
+            }
+        }
+    }
+
+</script>
+
+</html>
