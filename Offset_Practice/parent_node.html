@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=div, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<style>
+    #body {
+        height: 2000px;
+    }
+
+    #inner2 {
+        position: absolute;
+    }
+
+    #wrap {
+        position: relative;
+    }
+</style>
+
+<body class="" id="body">
+    <div class="" id="wrap">
+        WRAP
+        <div class="" id="inner1">
+            INNER1
+            <div class="" id="inner2">
+                INNER2
+            </div>
+        </div>
+    </div>
+</body>
+
+<script type="text/javascript">
+
+    window.onload = () => {
+        var inner2 = document.querySelector("#inner2");
+        // console.log('--------------Under the situation where there is no style setting...')
+        // console.log("inner2.id is:", inner2.id)
+        // // parrentnode.....
+        // console.log('inner2.parentnode.id', inner2.parentNode)
+        // 为什么要使用parentNode概念：
+        // 用于列表删除
+        // var aNodes = document.querySelectorAll("aNodes");
+        // for (let i = 0; i < aNodes.length, i++) {
+        //     aNodes[i].onclick = function () {
+        //         this.parentNOde.style.display = "none"
+        //     }
+        // }
+        // 为什么要使用包含块的概念？
+        // Offset parent....是谁。。。就把它当成css里的包含块。。。
+
+        /*
+        JS中的兼容性问题-----------------
+        addeventlistener。。。#hashchange。。。。
+        ev||event
+        鼠标滚轮。。。。。
+        offsetParent。。。。。。
+            1，父级是否开启定位。{
+
+            }
+            
+            2, 本身是否有定位
+
+            3，浏览器兼容问题。。。
+            
+            总共会有128个问题。
+        */
+
+        var inner2 = document.querySelector('#inner2')
+
+        // window.addEventListener('scroll', callback, false)
+        // function callback() {
+        //     var point = inner2.getBoundingClientRect()
+        //     console.log(point)
+        // }
+        // 如何实时获取视口的大小
+        window.addEventListener('resize', callback, false)
+        function callback() {
+            // 视口的大小。。。。。。。
+            var w = document.documentElement.clientWidth
+            var h = document.documentElement.clientHeight
+            console.log(w)
+            console.log(h)
+            // 普通元素的clientWidth是padding-box大小
+        }
+    }
+</script>
+
+</html>
