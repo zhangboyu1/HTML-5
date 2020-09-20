@@ -1,0 +1,51 @@
+/* default css setting for getting rid od some bad effects */
+*{margin:0;padding:0}
+html,body{height:100%;} 
+ /* //get rid of the broswer default scroll bar */
+html,body,h1,h2,h3,h4,h5,p,ul,li{margin:0px; padding:0px;font:14px;}
+a{text-decoration:none;display:block}
+li{list-style:none}
+img{display:block}
+
+/* common CSS */
+.clearfix{*zoom:1;}
+.clearfix::after{content:'';clear:both;display:table;}
+
+/* header Section */
+
+#header{width:100%;background-color:gray;}
+
+.headerMain{height:80px;width:1100px;background-color: aqua;bottom:0;margin: 0 auto; position:relative}
+.headerMain .navBar__List > li{float: left;margin-left:40px;position:relative;}
+.navBar__List > li > a> .nav--up{position:absolute;width:0px;transition:2s width; background-color: cadetblue;}
+.navBar__List > li:hover > a .nav--up{ width:100%;}
+.logo{float:left;}
+.navBar{float:right;}
+.logo, .navBar{margin-top:60px;}
+.arrow>img{width:40px;}
+.arrow{width:40px;position: absolute;top:80px;left: 50%; transition: 2s left; z-index:2;}
+
+/* Content Section */
+/* UseJS to set the value...................... */
+#content{width:100%; background-color:yellowgreen;position:relative;overflow: hidden;}
+
+/* .contentMain{background-color:pink;margin:0 auto;} */
+.content__List{ position:absolute; width:100%;transition:1s top;top:0}
+
+.content__item{
+    position:relative
+}
+
+.content__List > .content__item > div{
+    width:1100px; height:520px;
+    background-color:yellow;
+    position:absolute;
+    left:0;right:0;top:0;bottom: 0; 
+    margin:auto; 
+}
+
+/* .content__item{ } */
+
+
+
+
