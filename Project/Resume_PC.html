@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jerry-Resume</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+
+<body>
+    <section class="" id="wrapper">
+        <!-- This is used as a root section -->
+        <header class="" id="header">
+            <div class="headerMain">
+                <div class="logo">ooo</div>
+                    <nav class="navBar">
+                        <ul class="navBar__List clearfix">
+                            <li class="navBar__item navBar__home">
+                                <a href="javascript:;" rel="noopener noreferrer">
+                                    <div class="nav--up"><P>111111111</P></div>
+                                    <div class="nav--down "><P>111111111</P></div>
+                                </a>
+                            </li>
+
+                            <li class="navBar__item navBar__resume">
+                                <a href="javascript:;" rel="noopener noreferrer">
+                                    <div class="nav--up">22222222</div>
+                                    <div class="nav--down">22222222</div>
+                                </a>
+                            </li>
+
+                            <li class="navBar__item navBar__collection">
+                                <a href="javascript:;" rel="noopener noreferrer">
+                                    <div class="nav--up">333333333</div>
+                                    <div class="nav--down">333333333</div>
+                                </a>
+                            </li>
+
+                            <li class="navBar__item navBar__contact">
+                                <a href="javascript:;" rel="noopener noreferrer">
+                                    <div class="nav--up">444444444</div>
+                                    <div class="nav--down">444444444</div>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+            <div class="arrow">
+                <img src="./assets/header/arrow-down.png" alt="arrow-down">
+            </div>
+        </header>
+        <section id="content">
+                <div class="contentMain">
+                    <ul class='content__List'>
+                        <li class='content__item  content__home'><div class="home">home</div></li>
+                        <li class='content__item  content__resume'><div class="resume">resume</div></li>
+                        <li class='content__item  content__collection'><div class="collection">collection</div></li>
+                        <li class='content__item  content__contact'><div class="contact">contact</div></li>
+                    </ul>
+                </div>
+        </section>
+    </section>
+</body>
+
+<script>
+    
+window.onload=function(){
+    var arrowNode = document.querySelector('.arrow')
+    var homeNode = document.querySelector('.navBar__home')
+    var navItems= document.querySelectorAll('.navBar__item')
+    var navUpItems = document.querySelectorAll('.nav--up')
+    var headerNode = document.querySelector('header')
+    var cList = document.querySelector('.content__List')
+
+    console.log(cList);
+
+    arrowNode.style.left = `${homeNode.offsetLeft + homeNode.offsetWidth / 2 - arrowNode.offsetWidth / 2}px` 
+    //每一次进入需要有一个transition的效果: 
+    //获取第一个home节点的信息。
+    // 先写再封装
+    // console.log(arrowNode.style.offsetLeft)
+    // 绑定click事件
+        mouseClick()
+        function mouseClick(){
+            for (var i = 0; i < navItems.length; i++) {
+                // 怎么解决这个问题？
+                navItems[i].i = i
+                navItems[i].onclick = function (e) {
+                    arrowNode.style.left = navItems[this.i].offsetLeft + navItems[this.i].offsetWidth / 2 - arrowNode.offsetWidth / 2 + 'px'
+                    navUpItems[this.i].style.width = '100%'
+                    clearWidth(this.i, navUpItems)
+                    cList.style.top=-this.i*(intViewportHeight - headerNode.offsetHeight) + 'px'
+                };
+            }
+        }
+
+        function clearWidth(index, navUpItems) {
+            for (var i = 0; i < navUpItems.length; i++) {
+                i != index && (navUpItems[i].style.width = '0')
+            }
+        }
+
+        // Content Section...........
+        var contentNode = document.querySelector('#content')
+        var cLiNodes = document.querySelectorAll('.content__item')
+        
+        let intViewportHeight = window.innerHeight;
+        contentNode.style.height = intViewportHeight - headerNode.offsetHeight + 'px'
+        // 
+        console.log(cLiNodes)
+        for(var i =0;i< cLiNodes.length;i++){
+            cLiNodes[i].style.height = intViewportHeight - headerNode.offsetHeight + 'px'
+        }
+       
+        // 
+    }
+    
+</script>
+</html>
