@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<style>
+    * {
+        margin: 0;
+        padding: 0
+    }
+
+    #test {
+        width: 100%;
+        height: 200px;
+        background: pink;
+        position: absolute;
+        left: 0;
+        right: 0;
+        margin: auto;
+    }
+</style>
+
+<body>
+
+    <div class="" id="test"></div>
+
+</body>
+
+<script type='text/javascript'>
+
+    window.onload = function () {
+        var testNode = document.querySelector('#test')
+
+        //一般为了满足兼容性问题都需要。。 有一个判断
+        if (testNode.addEventListener) {
+            // 得使用DOM2 的这种形式。。。
+            testNode.addEventListener('DOMMouseScroll', fn)
+            console.log('firefox..')
+        }
+
+        // 因为火狐里没有onmousewhell这种事件机制。。。。 
+        testNode.onmousewheel = fn
+        function fn(ev) {
+            ev = ev || event
+            var dir = ''
+            if (ev.detail) {
+                console.log('operate in the fireFox,', ev.detail)
+                dir = ev.detail > 0 ? 'up' : 'down'
+
+            } else {
+                console.log('operate in the normal,', ev.wheelDelta)
+                dir = ev.wheelDelta > 0 ? 'up' : 'down'
+            }
+            console.log('mouseScroll direction:', dir)
+
+            switch (dir) {
+                case 'up':
+                    testNode.style.height = testNode.offsetHeight - 10 + 'px'
+                    break;
+                case 'down':
+                    testNode.style.height = testNode.offsetHeight + 10 + 'px'
+                    break;
+            }
+
+            // 禁止事件的默认行为
+            // DOM2
+            if (ev.preventDefault) {
+                ev.preventDefault()
+            }
+
+            // DOM0
+            // return false
+        }
+    }
+
+</script>
+
+</html>
