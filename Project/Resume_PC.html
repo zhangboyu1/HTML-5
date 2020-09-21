@@ -72,6 +72,7 @@ window.onload=function(){
     var navUpItems = document.querySelectorAll('.nav--up')
     var headerNode = document.querySelector('header')
     var cList = document.querySelector('.content__List')
+    var now=0
 
     console.log(cList);
 
@@ -87,20 +88,22 @@ window.onload=function(){
                 // 怎么解决这个问题？
                 navItems[i].i = i
                 navItems[i].onclick = function (e) {
-                    arrowNode.style.left = navItems[this.i].offsetLeft + navItems[this.i].offsetWidth / 2 - arrowNode.offsetWidth / 2 + 'px'
-                    navUpItems[this.i].style.width = '100%'
-                    clearWidth(this.i, navUpItems)
-                    cList.style.top=-this.i*(intViewportHeight - headerNode.offsetHeight) + 'px'
+                    now = this.i
+                    move()
+                    
                 };
             }
         }
 
-        function clearWidth(index, navUpItems) {
+        function move(index) {
             for (var i = 0; i < navUpItems.length; i++) {
                 i != index && (navUpItems[i].style.width = '0')
             }
-        }
 
+            arrowNode.style.left = navItems[index].offsetLeft + navItems[index].offsetWidth / 2 - arrowNode.offsetWidth / 2 + 'px'
+            navUpItems[index].style.width = '100%'
+            cList.style.top = -index * (intViewportHeight - headerNode.offsetHeight) + 'px'
+        }
         // Content Section...........
         var contentNode = document.querySelector('#content')
         var cLiNodes = document.querySelectorAll('.content__item')
@@ -108,12 +111,54 @@ window.onload=function(){
         let intViewportHeight = window.innerHeight;
         contentNode.style.height = intViewportHeight - headerNode.offsetHeight + 'px'
         // 
-        console.log(cLiNodes)
-        for(var i =0;i< cLiNodes.length;i++){
+         for (var i = 0; i < cLiNodes.length; i++) {
             cLiNodes[i].style.height = intViewportHeight - headerNode.offsetHeight + 'px'
         }
+        
        
-        // 
+        // carousel section : 
+    var contentNode = document.querySelector('#content')
+    //一般为了满足兼容性问题都需要。。 有一个判断
+    if (contentNode.addEventListener) {
+        // 得使用DOM2 的这种形式。。。
+        contentNode.addEventListener('DOMMouseScroll', fn)
+    }
+
+    contentNode.onmousewheel = fn
+    function fn(ev) {
+        ev = ev || event
+        var dir = ''
+        if (ev.detail) {
+            dir = ev.detail > 0 ? 'up' : 'down'
+            console.log(ev.detail)
+        } else {
+            dir = ev.wheelDelta > 0 ? 'up' : 'down'
+             console.log(ev.wheelDelta)
+        }
+
+        switch (dir) {
+            case 'up':
+             console.log(dir)
+                now===0?now:now--
+                move(now)
+                break;
+            case 'down':
+                 console.log(dir)
+                now++
+                now > 3?now=3:now
+                move(now)
+                break;
+        }
+
+        // 禁止事件的默认行为
+        // DOM2
+        if (ev.preventDefault) {
+            ev.preventDefault()
+        }
+
+        // DOM0
+        return false
+    }
     }
     
 </script>

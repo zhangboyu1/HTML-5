@@ -32,17 +32,9 @@ img{display:block}
 /* .contentMain{background-color:pink;margin:0 auto;} */
 .content__List{ position:absolute; width:100%;transition:1s top;top:0}
 
-.content__item{
-    position:relative
-}
+.content__item{position:relative}
 
-.content__List > .content__item > div{
-    width:1100px; height:520px;
-    background-color:yellow;
-    position:absolute;
-    left:0;right:0;top:0;bottom: 0; 
-    margin:auto; 
-}
+.content__List > .content__item > div{width:1100px; height:520px;background-color:yellow;position:absolute;left:0;right:0;top:0;bottom: 0; margin:auto; }
 
 /* .content__item{ } */
 
