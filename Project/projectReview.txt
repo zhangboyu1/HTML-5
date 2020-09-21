@@ -20,3 +20,13 @@
 
 #主体内容参数
 主体尺寸： 1100 * 520px
+
+#common title 
+{
+    color:#009ee0;font-size:80px;line-height:0.8;
+    font-weight:bold;letter-spacing:-5px;
+}
+#title position
+{
+    margin:50px, 0px, 100px, 50px;
+}
